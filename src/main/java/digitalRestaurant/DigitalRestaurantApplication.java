@@ -1,6 +1,5 @@
 package digitalRestaurant;
 
-import com.landawn.abacus.util.SpringApplicationContext;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DigitalRestaurantApplication {
 
 	public static void main(String[] args) {
-		SpringApplicationContext.run(DigitalRestaurantApplication.class, args);
+		SpringApplication.run(DigitalRestaurantApplication.class, args);
 	}
 
 }
