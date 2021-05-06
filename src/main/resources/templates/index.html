@@ -28,14 +28,14 @@ xmlns:th="http://www.thymeleaf.org">
               <p class="forgot-password-link" id="errorDisplayer"></p>
 
 
-              <form action="#" th:action="@{/welcomePage}" id="userForm" mehtod="POST">
+              <form action="#" th:action="@{/processForm}" id="userForm" method="POST" th:object="${customer}">
                   <div class="form-group">
                     <label for="email" class="sr-only">Customer's Name</label>
-                    <input type="text" name="email" id="email" class="form-control" placeholder="Customer's Name">
+                    <input th:field="*{customerName}"type="text" name="email" id="email" class="form-control" placeholder="Customer's Name">
                   </div>
                   <div class="form-group mb-4">
                     <label for="password" class="sr-only">Table Number</label>
-                    <input type="text" name="password" id="password" class="form-control" placeholder="Table Number">
+                    <input type="text" name="password" id="password" class="form-control" placeholder="Table Number" th:field="*{tableNo}">
                   </div>
                   <input name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Start Order">
                 </form>
