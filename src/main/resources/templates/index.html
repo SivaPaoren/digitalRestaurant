@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,9 @@
               </div>
               <p class="login-card-description">Ordering Information</p>
               <p class="forgot-password-link" id="errorDisplayer"></p>
-              <form action="#!">
+
+
+              <form action="#" th:action="@{/welcomePage}" id="userForm" mehtod="POST">
                   <div class="form-group">
                     <label for="email" class="sr-only">Customer's Name</label>
                     <input type="text" name="email" id="email" class="form-control" placeholder="Customer's Name">
@@ -34,8 +37,11 @@
                     <label for="password" class="sr-only">Table Number</label>
                     <input type="text" name="password" id="password" class="form-control" placeholder="Table Number">
                   </div>
-                  <input name="login" id="login" class="btn btn-block login-btn mb-4" type="button" value="Start Order">
+                  <input name="login" id="login" class="btn btn-block login-btn mb-4" type="submit" value="Start Order">
                 </form>
+
+
+
                 <p class="forgot-password-link">Stay Safe From Corona Virus</p>
                <!--<p class="login-card-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>--> 
                 <nav class="login-card-footer-nav">
@@ -80,7 +86,8 @@
   <script>
           $(document).ready(function(){
 
-             $("#login").click(validateData);
+            // $("#login").click(validateData);
+             $("#userForm").submit(validateData);
 
              function validateData(){
 
@@ -96,7 +103,7 @@
                   'color':'#F93106'
                 });
                 //errorDisplayingParagraph.style.
-                  
+
                 if(customersName.val() == "" || customersTableNumber.val() == ""){
                   customersName.focus();
                   errorDisplayingParagraph.html("The Fields are Blank");
@@ -109,16 +116,22 @@
                   customersTableNumber.focus();
                   errorDisplayingParagraph.html("Please Enter a Proper Table Number");
                   return false;
-                }else if(typeof customersName.val() !== 'string' || !customersName instanceof String){
+                }else if(Number(containsNumberOrNot(customersName.val()))){
                   customersName.focus();
                   errorDisplayingParagraph.html("Please Enter a Proper Name");
                   return false;
                 }else{
-                  errorDisplayingParagraph.html("Plese order your food");
+                  //errorDisplayingParagraph.html("Plese order your food");
                   return true;
                 }
 
              }
+
+             function containsNumberOrNot(myString){
+                 return /\d/.test(myString);
+             }
+
+        
              
           });
   </script>

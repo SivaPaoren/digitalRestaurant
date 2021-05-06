@@ -10,9 +10,15 @@ import digitalRestaurant.service.CustomerServiceImpl;
 public class controller {
 	@Autowired
 	private CustomerServiceImpl customerService;
+
      @GetMapping("/")
      public String home() {
     	 return "index.html";
+     }
+
+     @GetMapping("/welcomePage")
+     public String welcomePage(){
+          return "Welcome MotherFucker";
      }
 	
 	
