@@ -27,7 +27,7 @@ public class controller {
 
      @PostMapping("/processForm")
      public String processForm(@ModelAttribute(value="customer") Customer customer){
-          return "index.html";
+          return "home.html";
      }
 	
 	
