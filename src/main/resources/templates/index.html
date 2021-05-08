@@ -31,7 +31,7 @@ xmlns:th="http://www.thymeleaf.org">
               <form action="#" th:action="@{/processForm}" id="userForm" method="POST" th:object="${customer}">
                   <div class="form-group">
                     <label for="email" class="sr-only">Customer's Name</label>
-                    <input th:field="*{customerName}"type="text" name="email" id="email" class="form-control" placeholder="Customer's Name">
+                    <input th:field="*{customerName}"type="text"name="email" id="email" class="form-control" placeholder="Customer's Name">
                   </div>
                   <div class="form-group mb-4">
                     <label for="password" class="sr-only">Table Number</label>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -45,7 +46,7 @@
             </a></li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+            <a th:href="@{/Home}"><img src="img/logo.png" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
@@ -61,14 +62,14 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a th:href="@{/Home}"><img src="img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="./shop-cart.html">Shop Cart</a></li>
+                            <li class="active"><a href="#!">Home</a></li>
+                            <li><a href="#!" th:href="@{/menuCart}">Shop Cart</a></li>
 
                                     <li><a href="#">Dishes</a>
                                         <ul class="dropdown">
@@ -115,11 +116,9 @@
                     <div class="categories__item categories__large__item set-bg"
                     data-setbg="img/categories/category-1.jpg">
                     <div class="categories__text">
-                        <h2>ไก่ทอดพริกเสฉวน</h2>
-                        <p>380฿</p>
-                        <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
-                        edolore magna aliquapendisse ultrices gravida.</p>
-                        <a href="#!" class="addCartBtn" name="Gonta">Add Menu</a>
+                        <h2 class="menuName">ไก่ทอดพริกเสฉวน</h2>
+                        <p class="menuPrice">380฿</p>
+                        <a href="#!" class="addCartBtn">Add Menu</a>
                     </div>
                 </div>
             </div>
@@ -129,8 +128,8 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-2.jpg">
                             <div class="categories__text">
-                                <h4>Men’s fashion</h4>
-                                <p>358 items</p>
+                                <h4 class="menuName">หมูผัดพริกหยวกจีน</h4>
+                                <p class="menuPrice">358 ฿</p>
                                 <a href="#!" class="addCartBtn">Add Menu</a>
                             </div>
                         </div>
@@ -138,27 +137,27 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-3.jpg">
                             <div class="categories__text">
-                                <h4>Kid’s fashion</h4>
-                                <p>273 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Kid’s fashion</h4>
+                                <p class="menuPrice">273 items</p>
+                                <a href="#!" class="addCartBtn" name="ดอกกะหลํ่าผัดพริกแห้ง">Add Menu</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-4.jpg">
                             <div class="categories__text">
-                                <h4>Cosmetics</h4>
-                                <p>159 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Cosmetics</h4>
+                                <p class="menuPrice">159 items</p>
+                                <a href="#!" class="addCartBtn" name="หมาโผ่เต้าหู้">Add Menu</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-5.jpg">
                             <div class="categories__text">
-                                <h4>Accessories</h4>
-                                <p>792 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Accessories</h4>
+                                <p class="menuPrice">792 items</p>
+                                <a href="#!" class="addCartBtn" name="มันฝรั่งผัดนํ้าส้มสายชู">Add Menu</a>
                             </div>
                         </div>
                     </div>
@@ -171,36 +170,36 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-2.jpg">
                             <div class="categories__text">
-                                <h4>Men’s fashion</h4>
-                                <p>358 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Men’s fashion</h4>
+                                <p class="menuPrice">358 items</p>
+                                <a href="#!" class="addCartBtn" name="ไก่ผัดเกาลัด">Add Menu</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-3.jpg">
                             <div class="categories__text">
-                                <h4>Kid’s fashion</h4>
-                                <p>273 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Kid’s fashion</h4>
+                                <p class="menuPrice">273 items</p>
+                                <a href="#!" class="addCartBtn" name="หมูรมควันผัด">Add Menu</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-4.jpg">
                             <div class="categories__text">
-                                <h4>Cosmetics</h4>
-                                <p>159 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Cosmetics</h4>
+                                <p class="menuPrice">159 items</p>
+                                <a href="#!" class="addCartBtn" name="เนื้อรมควันผัด">Add Menu</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-5.jpg">
                             <div class="categories__text">
-                                <h4>Accessories</h4>
-                                <p>792 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Accessories</h4>
+                                <p class="menuPrice">792 items</p>
+                                <a href="#!" class="addCartBtn" name="มันฝรั่งผัดหมูสามชั้น">Add Menu</a>
                             </div>
                         </div>
                     </div>
@@ -212,36 +211,36 @@
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-2.jpg">
                             <div class="categories__text">
-                                <h4>Men’s fashion</h4>
-                                <p>358 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Men’s fashion</h4>
+                                <p class="menuPrice">358 items</p>
+                                <a href="#!" class="addCartBtn" name="เนื้อผัดพริกดอง">Add Menu</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-3.jpg">
                             <div class="categories__text">
-                                <h4>Kid’s fashion</h4>
-                                <p>273 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Kid’s fashion</h4>
+                                <p class="menuPrice">273 items</p>
+                                <a href="#!" class="addCartBtn" name="เต้าหู้เหม็น">Add Menu</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-4.jpg">
                             <div class="categories__text">
-                                <h4>Cosmetics</h4>
-                                <p>159 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Cosmetics</h4>
+                                <p class="menuPrice">159 items</p>
+                                <a href="#!" class="addCartBtn" name="เกี๊ยวซ่าหมาล่า">Add Menu</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-0">
                         <div class="categories__item set-bg" data-setbg="img/categories/category-5.jpg">
                             <div class="categories__text">
-                                <h4>Accessories</h4>
-                                <p>792 items</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+                                <h4 class="menuName">Accessories</h4>
+                                <p class="menuPrice">792 items</p>
+                                <a href="#!" class="addCartBtn" name="มันโถ">Add Menu</a>
                             </div>
                         </div>
                     </div>
@@ -264,21 +263,21 @@
                         <div class="banner__text">
                             <span>The Chloe Collection</span>
                             <h1>The Project Jacket</h1>
-                            <a href="#">Shop now</a>
+                            <a href="#" class="check">Shop now</a>
                         </div>
                     </div>
                     <div class="banner__item">
                         <div class="banner__text">
                             <span>The Chloe Collection</span>
                             <h1>The Project Jacket</h1>
-                            <a href="#">Shop now</a>
+                            <a href="#" class="check">Shop now</a>
                         </div>
                     </div>
                     <div class="banner__item">
                         <div class="banner__text">
                             <span>The Chloe Collection</span>
                             <h1>The Project Jacket</h1>
-                            <a href="#">Shop now</a>
+                            <a href="#" class="check">Shop now</a>
                         </div>
                     </div>
                 </div>

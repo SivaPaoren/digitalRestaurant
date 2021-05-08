@@ -1,5 +1,6 @@
 package digitalRestaurant.controller;
 
+import org.hibernate.CustomEntityDirtinessStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +21,22 @@ public class controller {
      @GetMapping("/")
      public String showGreetingPage(Model model) {
     	 //object customer is bind with model to send to welcome page
-    	 Customer customer = new Customer();
-    	 model.addAttribute("customer",customer);
+         model.addAttribute("customer",new Customer());
     	 return "index.html";
      }
-
+      
+     @GetMapping("/Home")
+     public String getHomePage(){
+          return "home.html";
+     }
      @PostMapping("/processForm")
      public String processForm(@ModelAttribute(value="customer") Customer customer){
-          return "home.html";
+          return "redirect:/Home";
+     }
+
+     @GetMapping("/menuCart")
+     public String showMenuCartPage(){
+       return "shop-cart.html";
      }
 	
 	
