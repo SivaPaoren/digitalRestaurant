@@ -69,7 +69,7 @@ xmlns:th="http://www.thymeleaf.org">
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="#!">Home</a></li>
-                            <li><a href="#!" th:href="@{/menuCart}">Shop Cart</a></li>
+                            <li><a href="#!" th:href="@{/menuCart}" id="goToCart">Shop Cart</a></li>
 
                                     <li><a href="#">Dishes</a>
                                         <ul class="dropdown">
@@ -595,6 +595,12 @@ xmlns:th="http://www.thymeleaf.org">
         </div>
     </div>
 </div>
+<form action="#" th:action="@{/processForm}" id="form" method="POST" th:object="${customer}">
+      <input type="text" id="location">
+      <input type="text" id="name">
+      <input type="text" id="price">
+     <input  type="submit" id="btnSendDataToController">
+  </form>
 <!-- Instagram End -->
 
 <!-- Footer Section Begin -->
