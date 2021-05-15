@@ -1,14 +1,16 @@
 package digitalRestaurant.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -35,9 +37,26 @@ public class Customer {
   @PrimaryKeyJoinColumn
   private DateAndTime dateAndTime;
   
-  @Column(name="menus")
-  @ElementCollection
-  private List<String> menus;
+
+
+  @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+  @JoinColumn(name = "menu_id")
+  private List<Menu> customersMenu = new ArrayList<>();
+
+
+
+
+
+
+  
+  public List<Menu> getCustomersMenu() {
+    return this.customersMenu;
+  }
+
+  public void setCustomersMenu(List<Menu> customersMenu) {
+    this.customersMenu = customersMenu;
+  }
+  
 
 public int getId() {
 	return id;
@@ -71,13 +90,7 @@ public void setDateAndTime(DateAndTime dateAndTime) {
 	this.dateAndTime = dateAndTime;
 }
 
-public List<String> getMenus() {
-	return menus;
-}
 
-public void setMenus(List<String> menus) {
-	this.menus = menus;
-}
   
   
   

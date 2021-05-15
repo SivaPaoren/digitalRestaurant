@@ -23,7 +23,7 @@ $(document).ready(function(){
 
         
 
-        //console.log(Menu.Location + Menu.Name+" "+Menu.Price);
+        console.log(menuDetails.Location + menuDetails.Name+" "+menuDetails.Price);
  });
 
 
