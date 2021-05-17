@@ -19,8 +19,27 @@ public class adminController {
 
     //display login page
     @GetMapping("/Login")
-    public String showAddMenuPage(){
+    public String showLoginPage(Model model){
+        model.addAttribute("admin", new Admin());
         return "loginAdmin.html";
+    }
+
+    //user will try to login here
+    @PostMapping("/Login")
+    public ModelAndView adminLogin(@ModelAttribute("admin")Admin admin){
+        boolean validAdminCheck = adminservice.AdminAuthenticatedToLoginOrNot(admin);
+        ModelAndView mv = new ModelAndView();
+
+        if(validAdminCheck){
+          System.out.println("Login successfully!");
+          mv.setViewName("adminControlerPanel.html");
+        }else{
+            admin.setPassword("");
+            mv.setViewName("loginAdmin.html");
+            mv.addObject("admin", admin);
+            mv.addObject("error", "Incorrect User Name or Password");
+        }
+        return mv;
     }
     
     //display register page
@@ -38,7 +57,7 @@ public class adminController {
 
          ModelAndView mv = new ModelAndView();
 
-         boolean validOrNot = adminservice.validAdminOrNot(admin.getUsername());
+         boolean validOrNot = adminservice.useableAdminUsernameCheck(admin.getUsername());
          if(validOrNot){
             adminservice.SaveAdmin(admin);
             mv.setViewName("adminControlerPanel.html");

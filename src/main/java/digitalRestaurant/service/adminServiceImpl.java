@@ -15,10 +15,9 @@ public class adminServiceImpl implements adminService{
     private adminRepository adminRepo;
 
     @Override
-    public boolean validAdminOrNot(String username) {
+    public boolean useableAdminUsernameCheck(String username) {
         Admin existingAdminWithSameUserName = adminRepo.findByUsername(username);
         if(existingAdminWithSameUserName != null){
-            System.out.println("User already exist");
             return false;
         }
         return true;
@@ -29,4 +28,22 @@ public class adminServiceImpl implements adminService{
     public void SaveAdmin(Admin admin) {
         adminRepo.save(admin);
     }
+
+
+    @Override
+    public boolean AdminAuthenticatedToLoginOrNot(Admin admin) {
+        // here we will authencate login user by passing admin paramater admin
+        Admin existinUser = adminRepo.findByUsername(admin.getUsername());
+        if(existinUser == null){
+            return false;
+        }else{
+             if(!existinUser.getPassword().equals(admin.getPassword())){
+                 return false;
+             }else{
+                 return true;
+             }
+        }
+    }
+
+    
 }
