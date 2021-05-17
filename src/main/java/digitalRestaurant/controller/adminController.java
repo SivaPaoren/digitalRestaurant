@@ -72,4 +72,10 @@ public class adminController {
          return mv;
     }
 
+
+    @GetMapping("/showControlPanel")
+    public String showControlPanel(){
+        return "adminControlerPanel.html";
+    }
+
 }
