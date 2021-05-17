@@ -16,13 +16,13 @@ public class Admin {
     private int id;
 
     @Column(name = "firstName")
-    private String firstName;
+    private String firstname;
 
     @Column(name = "lastName")
-    private String lastName;
+    private String lastname;
 
     @Column(name = "userName")
-    private String userName;
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -36,29 +36,31 @@ public class Admin {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return this.firstName;
+
+    public String getFirstname() {
+        return this.firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return this.lastName;
+    public String getLastname() {
+        return this.lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public String getUserName() {
-        return this.userName;
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
 
     public String getPassword() {
         return this.password;

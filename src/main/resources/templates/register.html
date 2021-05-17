@@ -28,28 +28,28 @@ xmlns:th="http://www.thymeleaf.org">
               <p class="forgot-password-link" id="errorDisplayer"></p>
 
 
-              <form action="#"  id="userForm" method="POST">
+              <form action="#" th:action="@{/Register}"  id="userForm" method="POST" th:object="${Admin}">
 
                 <p class="forgot-password-link" id="errorDisplayer">User Name will be used for signing in</p> 
                 <div class="form-group">
                     <label for="email" class="sr-only">User Name</label>
-                    <input type="text"name="username" id="firstName" class="form-control" placeholder="User Name">    
+                    <input type="text" th:field="*{userName}"name="username" id="firstName" class="form-control" placeholder="User Name">    
                 </div>
 
 
                   <div class="form-group">
                     <label for="email" class="sr-only">First Name</label>
-                    <input type="text"name="firstName" id="lastName" class="form-control" placeholder="First Name">
+                    <input type="text"name="firstName" th:field="*{firstName}" id="lastName" class="form-control" placeholder="First Name">
                   </div>
 
                   <div class="form-group">
                     <label for="email" class="sr-only">Last Name</label>
-                    <input type="text"name="lastName" id="email" class="form-control" placeholder="Last Name">
+                    <input type="text"name="lastName" th:field="*{lastName}" id="email" class="form-control" placeholder="Last Name">
                   </div>
 
                   <div class="form-group mb-4">
                     <label for="password" class="sr-only">Password</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                    <input type="password" name="password" id="password" th:field="*{password}" class="form-control" placeholder="Password">
                   </div>
 
                   <div class="form-group mb-4">
@@ -86,38 +86,45 @@ xmlns:th="http://www.thymeleaf.org">
 
                //alert("Hello Mother Fucker");
                //total number of table of a restaurant
-                var username = $("#userName").val();
-                var lastName = $("#lastName").val();
-                var firstName = $("#firstName").val();
-                var password = $("#password").val();
-                var password = $("#confirmPassword").val();
+                var username = $("#userName");
+                var lastName = $("#lastName");
+                var firstName = $("#firstName");
+                var password = $("#password");
+                var confirmPassword = $("#confirmPassword");
 
                 var errorDisplayingParagraph = $("#errorDisplayer");
                 errorDisplayingParagraph.css({
                   'color':'#F93106'
                 });
                 //errorDisplayingParagraph.style.
+                 if(usernamme.val().trim() == "" && lastName.val().trim() == "" && firstName.val().trim() == "" &&
+                   password.val().trim() =="" && confirmPassword.val().trim() == ""
+                  ){
+                    errorDisplayingParagraph.html("Please fill in the fields");
+                  }else{
+                       if(username.val().trim() == ""){
+                        errorDisplayingParagraph.html("Please input your User Name");
+                        username.focus();
+                       }else if(firstName.val().trim() == ""){
+                        errorDisplayingParagraph.html("Please input your First Name");
+                        firstName.focus();
+                       }else if(lastName.val().trim() == ""){
+                        errorDisplayingParagraph.html("Please input your Last Name");
+                        lastName.focus();
+                       }else if(password.val().trim() == ""){
+                        errorDisplayingParagraph.html("Please input your Password");
+                        password.focus();
+                       }else{
+                        errorDisplayingParagraph.html("Please input your Password");
+                        password.focus();
+                       }
+                  }
 
-                if(customersName.val() == "" || customersTableNumber.val() == ""){
-                  customersName.focus();
-                  errorDisplayingParagraph.html("The Fields are Blank");
-                  return false;
-                }else if(customersTableNumber.val() != Number(customersTableNumber.val())){
-                  customersTableNumber.focus();
-                  errorDisplayingParagraph.html("Please Enter a Proper Table Number");
-                  return false;
-                }else if(customersTableNumber.val() > totalNumberOfTable){
-                  customersTableNumber.focus();
-                  errorDisplayingParagraph.html("Please Enter a Proper Table Number");
-                  return false;
-                }else if(Number(containsNumberOrNot(customersName.val()))){
-                  customersName.focus();
-                  errorDisplayingParagraph.html("Please Enter a Proper Name");
-                  return false;
-                }else{
-                  //errorDisplayingParagraph.html("Plese order your food");
-                  return true;
-                }
+                  if(password.val() !== confirmPassword){
+                    errorDisplayingParagraph.html("Confirm Password and Password does not match");
+                    password.focus();
+                    confirmPassword.focus()
+                  }
 
              }
 
