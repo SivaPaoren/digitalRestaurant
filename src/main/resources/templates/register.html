@@ -10,6 +10,11 @@ xmlns:th="http://www.thymeleaf.org">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/login.css">
+  <style type="text/css" rel="stylesheet">
+       .red{
+         color: red;
+       }
+  </style>
 </head>
 <body>
   <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
@@ -25,26 +30,26 @@ xmlns:th="http://www.thymeleaf.org">
                 <img src="assets/images/logo.svg" alt="logo" class="logo">
               </div>
               <p class="login-card-description">Sign Up</p>
-              <p class="forgot-password-link" id="errorDisplayer"></p>
+              
 
 
-              <form action="#" th:action="@{/Register}"  id="userForm" method="POST" th:object="${Admin}">
+              <form action="#" th:action="@{/Register}"  id="userForm" method="POST" th:object="${admin}">
 
-                <p class="forgot-password-link" id="errorDisplayer">User Name will be used for signing in</p> 
+                <p class="forgot-password-link" id="errorDisplayer" th:style="${condition} ? 'color:red' : 'color:black'"th:text="${error}">User Name will be used for signing in</p> 
                 <div class="form-group">
                     <label for="email" class="sr-only">User Name</label>
-                    <input type="text" th:field="*{userName}"name="username" id="firstName" class="form-control" placeholder="User Name">    
+                    <input type="text" th:field="*{username}"name="username" id="userName" class="form-control" placeholder="User Name">    
                 </div>
 
 
                   <div class="form-group">
                     <label for="email" class="sr-only">First Name</label>
-                    <input type="text"name="firstName" th:field="*{firstName}" id="lastName" class="form-control" placeholder="First Name">
+                    <input type="text"name="firstName" th:field="*{firstname}" id="firstName" class="form-control" placeholder="First Name">
                   </div>
 
                   <div class="form-group">
                     <label for="email" class="sr-only">Last Name</label>
-                    <input type="text"name="lastName" th:field="*{lastName}" id="email" class="form-control" placeholder="Last Name">
+                    <input type="text"name="lastName" th:field="*{lastname}" id="lastName" class="form-control" placeholder="Last Name">
                   </div>
 
                   <div class="form-group mb-4">
@@ -97,34 +102,54 @@ xmlns:th="http://www.thymeleaf.org">
                   'color':'#F93106'
                 });
                 //errorDisplayingParagraph.style.
-                 if(usernamme.val().trim() == "" && lastName.val().trim() == "" && firstName.val().trim() == "" &&
-                   password.val().trim() =="" && confirmPassword.val().trim() == ""
+                 if(username.val() == "" && lastName.val() == "" && firstName.val() == "" &&
+                   password.val() == "" && confirmPassword.val() == ""
                   ){
                     errorDisplayingParagraph.html("Please fill in the fields");
+                    return false;
                   }else{
-                       if(username.val().trim() == ""){
+
+                       if(username.val() == ""){
                         errorDisplayingParagraph.html("Please input your User Name");
                         username.focus();
-                       }else if(firstName.val().trim() == ""){
+                        return false;
+                       }
+                       else if(firstName.val() == ""){
                         errorDisplayingParagraph.html("Please input your First Name");
                         firstName.focus();
-                       }else if(lastName.val().trim() == ""){
+                        return false;
+                       }
+
+                       else if(lastName.val() == ""){
                         errorDisplayingParagraph.html("Please input your Last Name");
                         lastName.focus();
-                       }else if(password.val().trim() == ""){
-                        errorDisplayingParagraph.html("Please input your Password");
-                        password.focus();
-                       }else{
-                        errorDisplayingParagraph.html("Please input your Password");
-                        password.focus();
+                        return false;
                        }
-                  }
+                       
+                       else if(password.val() == "" || confirmPassword.val().trim() == ""){
+                        errorDisplayingParagraph.html("Please input your Password and Confirm Password");
+                        password.focus();
+                        confirmPassword.focus();
+                        return false;
+                       }
 
-                  if(password.val() !== confirmPassword){
-                    errorDisplayingParagraph.html("Confirm Password and Password does not match");
-                    password.focus();
-                    confirmPassword.focus()
-                  }
+                       else if(password.val().length <= 4){
+                        errorDisplayingParagraph.html("Password is too short");
+                        password.focus();
+                        return false;
+                      }
+
+                       else if(password.val() !== confirmPassword.val()){
+                        errorDisplayingParagraph.html("Confirm Password and Password does not match");
+                        password.focus();
+                        confirmPassword.focus()
+                        return false;
+                     }
+                     else{
+                       return true;
+                     }
+
+                 }
 
              }
 

@@ -6,6 +6,6 @@ import digitalRestaurant.entity.Admin;
 
 
 public interface adminService {
-    public boolean validAdminOrNot(Admin admin);
+    public boolean validAdminOrNot(String username);
     public void SaveAdmin(Admin admin);
 }

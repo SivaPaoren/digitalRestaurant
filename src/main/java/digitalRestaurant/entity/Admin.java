@@ -1,7 +1,7 @@
 package digitalRestaurant.entity;
 
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,20 +11,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "admin_table")
 public class Admin {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "firstName")
-    private String firstname;
-
-    @Column(name = "lastName")
-    private String lastname;
-
-    @Column(name = "userName")
     private String username;
-
-    @Column(name = "password")
+    private String firstname;
+    private String lastname;
     private String password;
 
 

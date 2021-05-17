@@ -15,8 +15,8 @@ public class adminServiceImpl implements adminService{
     private adminRepository adminRepo;
 
     @Override
-    public boolean validAdminOrNot(Admin admin) {
-        Admin existingAdminWithSameUserName = adminRepo.FindByUserName(admin.getUsername());
+    public boolean validAdminOrNot(String username) {
+        Admin existingAdminWithSameUserName = adminRepo.findByUsername(username);
         if(existingAdminWithSameUserName != null){
             System.out.println("User already exist");
             return false;

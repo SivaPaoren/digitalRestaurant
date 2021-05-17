@@ -7,5 +7,6 @@ import digitalRestaurant.entity.Admin;
 
 @Repository
 public interface adminRepository extends JpaRepository<Admin,Integer>{
-    public Admin FindByUserName(String name);
+   
+     Admin findByUsername(String username);
 }

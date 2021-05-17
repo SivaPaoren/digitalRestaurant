@@ -27,6 +27,7 @@ public class adminController {
     @GetMapping("/Register")
     public String showRegisterPage(Model model){
         model.addAttribute("admin", new Admin());
+        model.addAttribute("condition", false);
         return "register.html";
     }
 
@@ -37,13 +38,15 @@ public class adminController {
 
          ModelAndView mv = new ModelAndView();
 
-         boolean validOrNot = adminservice.validAdminOrNot(admin);
+         boolean validOrNot = adminservice.validAdminOrNot(admin.getUsername());
          if(validOrNot){
             adminservice.SaveAdmin(admin);
             mv.setViewName("adminControlerPanel.html");
          }else{
             admin.setPassword("");
             mv.addObject("admin", admin);
+            mv.addObject("condition", true);
+            mv.addObject("error", "User Name "+admin.getUsername()+" is already taken");
             mv.setViewName("register.html");
          }
 
