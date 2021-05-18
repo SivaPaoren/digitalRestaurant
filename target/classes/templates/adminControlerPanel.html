@@ -14,8 +14,10 @@ xmlns:th="http://www.thymeleaf.org">
     <div class="container justify-content-center">
         <div class="row">
           <div class="col-sm bg-dark">
+             
+            <p th:text="${msg}" class="fs-1"></p>
          
-            <form action="#!"  th:action="@{/AdminControlPanel}" method="POST" id="#menuForm" th:object="${menu}">         
+            <form action="#!"  th:action="@{/AdminControlPanel}" method="POST" id="#menuForm" th:object="${menu}" enctype='multipart/form-data'>         
 
               <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Menu Name</label>

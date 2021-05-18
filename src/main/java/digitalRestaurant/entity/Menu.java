@@ -12,17 +12,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name="menu_table")
 public class Menu {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @Column(name="menu_name")
+    @Column(name="name")
     private String name;
 
-    @Column(name="menu_directory")
-    private String directorys;
+    @Column(name="path")
+    private String imagePath;
 
-    @Column(name = "menu_price")
+    @Column(name = "price")
     private String price;
 
     @Column(name = "currency")
@@ -32,8 +33,17 @@ public class Menu {
     private Customer customer; 
 
 
+    public String getImagePath() {
+        return this.imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public int getId() {
         return this.id;
+
     }
 
     public void setId(int id) {
@@ -46,14 +56,6 @@ public class Menu {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDirectorys() {
-        return this.directorys;
-    }
-
-    public void setDirectorys(String directorys) {
-        this.directorys = directorys;
     }
 
     public String getPrice() {

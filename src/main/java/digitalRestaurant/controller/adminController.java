@@ -6,20 +6,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import digitalRestaurant.entity.Admin;
 import digitalRestaurant.entity.Menu;
+import digitalRestaurant.repository.menuServiceImpl;
 import digitalRestaurant.service.adminServiceImpl;
 
 @Controller
 public class adminController {
     
     //this is the directory where is images will be stored
-    public static String uploadDirectory = System.getProperty("user-dir")+"/src/main/resources/static/imageData";
+    public static String uploadDirectory = System.getProperty("user.dir")+"/src/main/resources/static/imageData";
      
     @Autowired
     private adminServiceImpl adminservice;
+
+    @Autowired
+    private menuServiceImpl menuService;
 
     //display login page
     @GetMapping("/Login")
@@ -76,6 +81,25 @@ public class adminController {
     public String showControlPanel(Model model){
         model.addAttribute("menu",new Menu());
         return "adminControlerPanel.html";
+    }
+
+    @PostMapping("/AdminControlPanel")
+    public String processAndSaveMenuForm(@ModelAttribute("menu")Menu menu,@RequestParam("img")MultipartFile image,Model model){
+
+        //save image and return the new image name
+        String ImageName = adminservice.saveImg(image, menu.getName(), uploadDirectory);
+
+        if(!ImageName.equals("") || ImageName != null){
+            System.out.println(ImageName);
+            menu.setImagePath(ImageName);
+            menuService.saveMenu(menu);
+            return "displayAllMenu.html";
+        }else{
+             model.addAttribute("menu", menu);
+             model.addAttribute("msg", menu.getName()+" is alredy added");
+             return "adminControlerPanel.html";
+        }
+
     }
 
 }
