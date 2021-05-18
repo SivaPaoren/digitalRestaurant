@@ -11,33 +11,35 @@ xmlns:th="http://www.thymeleaf.org">
 </head>
 <body>
        
-    <div class="container-md">
+    <div class="container justify-content-center">
         <div class="row">
-          <div class="col bg-dark">
+          <div class="col-sm bg-dark">
          
+            <form action="#!"  th:action="@{/AdminControlPanel}" method="POST" id="#menuForm" th:object="${menu}">         
 
-            <div class="mb-3">
+              <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Menu Name</label>
-                <input type="text" class="form-control" id="menuName" placeholder="Menu Price">
+                <input type="text" class="form-control" th:field="*{name}" id="menuName" placeholder="Menu Name">
               </div>
 
               <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Price</label>
-                <input type="text" class="form-control" id="price" placeholder="Price">
+                <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="Price">
               </div>
 
               <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Currency</label>
-                <input type="text" class="form-control" id="menuName" placeholder="Currency" value="฿">
+                <input type="text" class="form-control" th:field="*{currency}" id="menuName" placeholder="Currency" value="฿">
               </div>
 
               <div class="mb-3">
                 <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" id="formFile">
+                <input class="form-control" type="file" name="img" id="formFile">
               </div>
-              
-                   
-          </div>
+                 
+              <button type="submit" class="btn btn-secondary">Save</button>
+            </form>
+           </div>
         </div>
       </div>
 

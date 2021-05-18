@@ -6,13 +6,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import digitalRestaurant.entity.Admin;
+import digitalRestaurant.entity.Menu;
 import digitalRestaurant.service.adminServiceImpl;
 
 @Controller
 public class adminController {
+    
+    //this is the directory where is images will be stored
+    public static String uploadDirectory = System.getProperty("user-dir")+"/src/main/resources/static/imageData";
      
     @Autowired
     private adminServiceImpl adminservice;
@@ -26,20 +30,19 @@ public class adminController {
 
     //user will try to login here
     @PostMapping("/Login")
-    public ModelAndView adminLogin(@ModelAttribute("admin")Admin admin){
+    public String adminLogin(@ModelAttribute("admin")Admin admin,Model model){
         boolean validAdminCheck = adminservice.AdminAuthenticatedToLoginOrNot(admin);
-        ModelAndView mv = new ModelAndView();
+        
 
         if(validAdminCheck){
-          System.out.println("Login successfully!");
-          mv.setViewName("adminControlerPanel.html");
+         //redirect to login successfull page by redecting to AdminControlPanel
+          return "redirect:/AdminControlPanel";
         }else{
             admin.setPassword("");
-            mv.setViewName("loginAdmin.html");
-            mv.addObject("admin", admin);
-            mv.addObject("error", "Incorrect User Name or Password");
+            model.addAttribute("admin", admin);
+            model.addAttribute("error", "Incorrect User Name or Password");
+            return "loginAdmin.html";
         }
-        return mv;
     }
     
     //display register page
@@ -53,28 +56,25 @@ public class adminController {
 
     //get register admin object here
     @PostMapping("/Register")
-    public ModelAndView saveAdmin(@ModelAttribute("admin")Admin admin){
-
-         ModelAndView mv = new ModelAndView();
+    public String saveAdmin(@ModelAttribute("admin")Admin admin,Model model){
 
          boolean validOrNot = adminservice.useableAdminUsernameCheck(admin.getUsername());
          if(validOrNot){
             adminservice.SaveAdmin(admin);
-            mv.setViewName("adminControlerPanel.html");
+            return "redirect:/AdminControlPanel";
          }else{
             admin.setPassword("");
-            mv.addObject("admin", admin);
-            mv.addObject("condition", true);
-            mv.addObject("error", "User Name "+admin.getUsername()+" is already taken");
-            mv.setViewName("register.html");
+            model.addAttribute("admin", admin);
+            model.addAttribute("condition", true);
+            model.addAttribute("error", "User Name "+admin.getUsername()+" is already taken");
+            return "register.html";
          }
-
-         return mv;
     }
 
 
-    @GetMapping("/showControlPanel")
-    public String showControlPanel(){
+    @GetMapping("/AdminControlPanel")
+    public String showControlPanel(Model model){
+        model.addAttribute("menu",new Menu());
         return "adminControlerPanel.html";
     }
 
