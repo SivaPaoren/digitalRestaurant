@@ -8,18 +8,25 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import digitalRestaurant.entity.Admin;
+import digitalRestaurant.entity.Menu;
+import digitalRestaurant.model.MenuDto;
 import digitalRestaurant.repository.adminRepository;
+import digitalRestaurant.repository.menuRepository;
 
 @Service
 public class adminServiceImpl implements adminService{
      
     @Autowired
     private adminRepository adminRepo;
+
+    @Autowired
+    private menuRepository menuRepo;
 
     @Override
     public boolean useableAdminUsernameCheck(String username) {
@@ -53,19 +60,42 @@ public class adminServiceImpl implements adminService{
     }
 
     @Override
-    public String saveImg(MultipartFile img,String menuName,String uploadDirectory){
-        // TODO Auto-generated method stub
-        String imgName = menuName+img.getOriginalFilename().substring(img.getOriginalFilename().length()-4);
-        Path imgNameAndPath = Paths.get(uploadDirectory, imgName);
+    public MenuDto saveImg(MenuDto menuDto){
+       
+        //menu name will be here so that it can be added as a new image name
+        String menuName = menuDto.getMenuName();
+
+        //Image file will be here send from server
+        MultipartFile imageFile = menuDto.getOriginalImageFile();
+
+        //finle extendtoin is generated here
+        String extentions = FilenameUtils.getExtension(imageFile.getOriginalFilename());
         
-        //writing files here
-        try {
-            Files.write(imgNameAndPath,img.getBytes());
-        } catch (IOException e) {
-          e.printStackTrace();
-           return "";
-        }
-       return imgName;
+        //image name is generated here to match the menu name
+        String newGeneratedImageName = menuName +"."+extentions;
+        //path to save the image is set here //getUploadDirectory is from controller is returns directory in String
+        Path imgNameAndPath = Paths.get(menuDto.getUploadDirectory(), newGeneratedImageName);
+        
+        //here we check if the menu already exits in the repository or not
+        Menu existingMenu = menuRepo.findByImagename(newGeneratedImageName);
+
+         if(existingMenu == null){
+             //here we will store image to our files in our repository
+             try {
+                Files.write(imgNameAndPath,imageFile.getBytes());
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+            menuDto.setImageAlredyExistInTheDataBaseOrNot(false);
+            menuDto.setImageName(newGeneratedImageName);
+            return menuDto;
+         }
+
+            menuDto.setImageAlredyExistInTheDataBaseOrNot(true);
+            menuDto.setImageName(menuDto.getImageName());
+
+
+       return menuDto;
     }
 
     

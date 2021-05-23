@@ -5,14 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import digitalRestaurant.entity.Admin;
 import digitalRestaurant.entity.Menu;
-import digitalRestaurant.repository.menuServiceImpl;
+import digitalRestaurant.model.MenuDto;
 import digitalRestaurant.service.adminServiceImpl;
+import digitalRestaurant.service.menuServiceImpl;
 
 @Controller
 public class adminController {
@@ -85,21 +87,42 @@ public class adminController {
 
     @PostMapping("/AdminControlPanel")
     public String processAndSaveMenuForm(@ModelAttribute("menu")Menu menu,@RequestParam("img")MultipartFile image,Model model){
+        
+        //send object to validate check 
+        MenuDto menuDtoObject = new MenuDto(menu.getName(),image,uploadDirectory);
 
-        //save image and return the new image name
-        String ImageName = adminservice.saveImg(image, menu.getName(), uploadDirectory);
-
-        if(!ImageName.equals("") || ImageName != null){
-            System.out.println(ImageName);
-            menu.setImagePath(ImageName);
-            menuService.saveMenu(menu);
-            return "displayAllMenu.html";
+        //return  the result of the object
+         MenuDto returnObjectFromSerice = adminservice.saveImg(menuDtoObject);
+       
+        if(returnObjectFromSerice.isImageAlredyExistInTheDataBaseOrNot()){
+            model.addAttribute("menu", menu);
+            model.addAttribute("msg", menu.getName()+" is alredy added");
+            return "adminControlerPanel.html";
         }else{
-             model.addAttribute("menu", menu);
-             model.addAttribute("msg", menu.getName()+" is alredy added");
-             return "adminControlerPanel.html";
+            //image saved successfull will be done here
+            System.out.println(menu.getImagename());
+            menu.setImagename(returnObjectFromSerice.getImageName());
+            menuService.saveMenu(menu);
+            return "redirect:/Category";
         }
-
     }
+
+    @GetMapping("/Category")
+    public String displayMenuToEditPage(Model model){
+       model.addAttribute("Menus", menuService.getAllMenus());
+       return "displayMenuToAdmin.html";
+    }
+
+
+    @GetMapping("/EditMenu/{name}")
+    public String getEditMenuPage(@PathVariable("name")String name,Model model){
+        System.out.println(name+"###################");
+        //send menu to eh editmenu page from here
+        model.addAttribute("menu", menuService.getMenuByName(name));
+        return "editMenu.html";
+    }
+
+
+
 
 }
