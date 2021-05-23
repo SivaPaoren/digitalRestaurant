@@ -100,14 +100,14 @@ public class adminController {
             return "adminControlerPanel.html";
         }else{
             //image saved successfull will be done here
-            System.out.println(menu.getImagename());
             menu.setImagename(returnObjectFromSerice.getImageName());
             menuService.saveMenu(menu);
-            return "redirect:/Category";
+            model.addAttribute("msg", menu.getName()+" added successfully");
+            return "adminControlerPanel.html";
         }
     }
 
-    @GetMapping("/Category")
+    @GetMapping("/MenuCategory")
     public String displayMenuToEditPage(Model model){
        model.addAttribute("Menus", menuService.getAllMenus());
        return "displayMenuToAdmin.html";
@@ -116,12 +116,16 @@ public class adminController {
 
     @GetMapping("/EditMenu/{name}")
     public String getEditMenuPage(@PathVariable("name")String name,Model model){
-        System.out.println(name+"###################");
-        //send menu to eh editmenu page from here
+      //Editing menu page will be directed from here
         model.addAttribute("menu", menuService.getMenuByName(name));
         return "editMenu.html";
     }
 
+    @GetMapping("/Menu")
+    public String menu(Model model){
+        model.addAttribute("menu", new Menu());
+        return "editMenu.html";
+    }
 
 
 
