@@ -43,7 +43,7 @@ public class adminController {
 
         if(validAdminCheck){
          //redirect to login successfull page by redecting to AdminControlPanel
-          return "redirect:/AdminControlPanel";
+          return "redirect:/Add-Menu";
         }else{
             admin.setPassword("");
             model.addAttribute("admin", admin);
@@ -68,7 +68,7 @@ public class adminController {
          boolean validOrNot = adminservice.useableAdminUsernameCheck(admin.getUsername());
          if(validOrNot){
             adminservice.SaveAdmin(admin);
-            return "redirect:/AdminControlPanel";
+            return "redirect:/Add-Menu";
          }else{
             admin.setPassword("");
             model.addAttribute("admin", admin);
@@ -79,54 +79,52 @@ public class adminController {
     }
 
 
-    @GetMapping("/AdminControlPanel")
+    @GetMapping("/Add-Menu")
     public String showControlPanel(Model model){
         model.addAttribute("menu",new Menu());
-        return "adminControlerPanel.html";
+        return "addMenu.html";
     }
 
-    @PostMapping("/AdminControlPanel")
+    @PostMapping("/Add-Menu")
     public String processAndSaveMenuForm(@ModelAttribute("menu")Menu menu,@RequestParam("img")MultipartFile image,Model model){
         
         //send object to validate check 
         MenuDto menuDtoObject = new MenuDto(menu.getName(),image,uploadDirectory);
 
         //return  the result of the object
-         MenuDto returnObjectFromSerice = adminservice.saveImg(menuDtoObject);
+         MenuDto returnObjectFromSerice = menuService.saveImg(menuDtoObject);
        
         if(returnObjectFromSerice.isImageAlredyExistInTheDataBaseOrNot()){
             model.addAttribute("menu", menu);
             model.addAttribute("msg", menu.getName()+" is alredy added");
-            return "adminControlerPanel.html";
+            return "addMenu.html";
         }else{
             //image saved successfull will be done here
             menu.setImagename(returnObjectFromSerice.getImageName());
             menuService.saveMenu(menu);
             model.addAttribute("msg", menu.getName()+" added successfully");
-            return "adminControlerPanel.html";
+            return "addMenu.html";
         }
     }
 
-    @GetMapping("/MenuCategory")
+
+
+    @GetMapping("/Menu-Category")
     public String displayMenuToEditPage(Model model){
        model.addAttribute("Menus", menuService.getAllMenus());
-       return "displayMenuToAdmin.html";
+       return "menuCategory.html";
     }
 
 
-    @GetMapping("/EditMenu/{name}")
+    @GetMapping("/Edit-Menu/{name}")
     public String getEditMenuPage(@PathVariable("name")String name,Model model){
       //Editing menu page will be directed from here
         model.addAttribute("menu", menuService.getMenuByName(name));
         return "editMenu.html";
     }
 
-    @GetMapping("/Menu")
-    public String menu(Model model){
-        model.addAttribute("menu", new Menu());
-        return "editMenu.html";
-    }
-
+    
+ 
 
 
 }

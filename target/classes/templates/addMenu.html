@@ -96,7 +96,7 @@ xmlns:th="http://www.thymeleaf.org">
                             <br>
                             <p th:text="${msg}" id="errorDisplayer"></p>
 
-                            <form  th:action="@{/AdminControlPanel}" method="POST" id="menuForm" th:object="${menu}" enctype='multipart/form-data'>         
+                            <form  th:action="@{/Add-Menu}" method="POST" id="menuForm" th:object="${menu}" enctype='multipart/form-data'>         
 
                                 <div class="mb-3">
                                   <label for="exampleFormControlInput1" class="form-label">Menu Name</label>
@@ -119,7 +119,7 @@ xmlns:th="http://www.thymeleaf.org">
                                 </div>
                                    
                                 <button type="submit" class="site-btn">Add Menu</button>
-                                <a href="#!" th:href="@{/MenuCategory}" class="site-btn">View All Menu</a>
+                                <a href="#!" th:href="@{/Menu-Category}" class="site-btn">View All Menu</a>
                               </form>
                         </div>
                     </div>

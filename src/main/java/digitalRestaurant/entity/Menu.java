@@ -78,4 +78,17 @@ public class Menu {
   */
 
 
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", imagename='" + getImagename() + "'" +
+            ", price='" + getPrice() + "'" +
+            ", currency='" + getCurrency() + "'" +
+            "}";
+    }
+
+
+
 }

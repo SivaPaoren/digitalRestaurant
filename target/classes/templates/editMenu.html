@@ -75,152 +75,148 @@ xmlns:th="http://www.thymeleaf.org">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <a href="./blog.html">Edit Menu</a>
+                        <span>Add Menu</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Breadcrumb End -->
-
-    <!-- Blog Details Section Begin -->
-    <section class="blog-details spad">
+     
+      <!-- Contact Section Begin -->
+      <section class="contact spad">
         <div class="container">
+
             <div class="row">
-                <div class="col-lg-8 col-md-8">
-                    <div class="blog__details__content">
-                        <div class="blog__details__item">
-                            <img src="img/blog/details/blog-details.jpg" th:src="@{${'/imageData/'+menu.imagename}}" alt="">
-                            <div class="blog__details__item__title">
-                                <span class="tip" th:text="${menu.name}"></span>
-                                 <br>
-                                 <br>
-                                 <br>
-                                <div class="contact__form">
-                                    <h5>Edit Menu</h5>
-                                    <p th:text="${msg}" id="errorDisplayer"></p>
-        
-                                    <form method="POST" id="menuForm" th:object="${menu}" enctype='multipart/form-data'>         
-        
-                                        <div class="mb-3">
-                                          <label for="exampleFormControlInput1" class="form-label">Menu Name</label>
-                                          <input type="text" class="form-control"  id="menuName" placeholder="Menu Name" th:field="*{name}">
-                                        </div>
-                          
-                                        <div class="mb-3">
-                                          <label for="exampleFormControlInput1" class="form-label">Price</label>
-                                          <input type="text" class="form-control" id="price" placeholder="Price" th:field="*{price}">
-                                        </div>
-                          
-                                        <div class="mb-3">
-                                          <label for="exampleFormControlInput1" class="form-label">Currency</label>
-                                          <input type="text" class="form-control"  id="currency" placeholder="Currency" value="฿" th:field="*{currency}">
-                                        </div>
-                          
-                                        <div class="mb-3">
-                                          <label for="formFile" class="form-label">Add Image</label>
-                                          <input class="form-control" type="file" name="img" id="imageFile">
-                                        </div>
-                                           
-                                        <button type="submit" class="site-btn">Update And Save</button>
-                                        <a class="site-btn">Delete Menu</a>
-                                      </form>
+                <div class="col-lg-6 col-md-6">
+
+                    <div class="blog__details__item">
+                        <img th:src="@{${'/imageData/'+menu.imagename}}" alt="" width="790px" height="520px">
+                    </div>
+
+                    <div class="contact__content">
+                        <div class="contact__form">
+                            <h5>Update Menu</h5>
+                            <br>
+                            <p th:text="${msg}" id="errorDisplayer"></p>
+
+                            <form  th:action="@{/Update-Menu}" method="POST" id="menuForm" th:object="${menu}" enctype='multipart/form-data'>         
+
+                                <div class="mb-3">
+                                  <label for="exampleFormControlInput1" class="form-label">Menu Name</label>
+                                  <input type="text" class="form-control" th:field="*{name}" id="menuName" placeholder="Menu Name">
                                 </div>
-        
+                  
+                                <div class="mb-3">
+                                  <label for="exampleFormControlInput1" class="form-label">Price</label>
+                                  <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="Price">
+                                </div>
+                  
+                                <div class="mb-3">
+                                  <label for="exampleFormControlInput1" class="form-label">Currency</label>
+                                  <input type="text" class="form-control" th:field="*{currency}" id="currency" placeholder="Currency" value="฿">
+                                </div>
+                  
+                                <div class="mb-3">
+                                  <label for="formFile" class="form-label">Add Image</label>
+                                  <input class="form-control" type="file" name="img" id="imageFile">
+                                </div>
+                                   
+                                <button type="submit" class="site-btn">Save And Update</button>
+                                <a th:href="@{/Delete-Menu}" class="site-btn">Delete Menu</a>
 
+                              </form>
+                        </div>
+                    </div>
+                </div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-         </div>
-      </div>
-    </section>
-    <!-- Blog Details Section End -->
-    <!-- Footer Section Begin -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-7">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        cilisis.</p>
-                        <div class="footer__payment">
-                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-5">
-                    <div class="footer__widget">
-                        <h6>Quick links</h6>
-                        <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blogs</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-4">
-                    <div class="footer__widget">
-                        <h6>Account</h6>
-                        <ul>
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">Orders Tracking</a></li>
-                            <li><a href="#">Checkout</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-8 col-sm-8">
-                    <div class="footer__newslatter">
-                        <h6>NEWSLETTER</h6>
-                        <form action="#">
-                            <input type="text" placeholder="Email">
-                            <button type="submit" class="site-btn">Subscribe</button>
-                        </form>
-                        <div class="footer__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    <div class="footer__copyright__text">
-                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-                    </div>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
-
-    <!-- Search Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
         </div>
     </div>
-    <!-- Search End -->
+</section>
 
-    <!-- Js Plugins -->
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-7">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                    <div class="footer__payment">
+                        <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
+                        <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-5">
+                <div class="footer__widget">
+                    <h6>Quick links</h6>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blogs</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4">
+                <div class="footer__widget">
+                    <h6>Account</h6>
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Orders Tracking</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-8 col-sm-8">
+                <div class="footer__newslatter">
+                    <h6>NEWSLETTER</h6>
+                    <form action="#">
+                        <input type="text" placeholder="Email">
+                        <button type="submit" class="site-btn">Subscribe</button>
+                    </form>
+                    <div class="footer__social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                <div class="footer__copyright__text">
+                    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                </div>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search End -->
+
+<!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
     <script src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
     <script src="js/jquery.magnific-popup.min.js" th:src="@{/js/jquery.magnific-popup.min.js}"></script>
@@ -231,6 +227,47 @@ xmlns:th="http://www.thymeleaf.org">
     <script src="js/owl.carousel.min.js"  th:src="@{/js/owl.carousel.min.js}"></script>
     <script src="js/jquery.nicescroll.min.js"  th:src="@{/js/jquery.nicescroll.min.js}"></script>
     <script src="js/main.js"  th:src="@{/js/main.js}"></script>
+    <script>
+
+    $(document).ready(function(){
+ 
+    $("#menuForm").submit(function(){
+        
+        var menuName =$("#menuName");
+       var price = $("#price");
+       var currency = $("#currency");
+       var imageFile = $("#imageFile");
+       var errorDisplayer = $("#errorDisplayer");
+       
+       if(menuName.val() == ""){
+        errorDisplayer.css({'color':'red'});
+        errorDisplayer.text("Menu name is empty");
+        menuName.focus();
+        return false;
+       }else if(price.val() == ""){
+        errorDisplayer.css({'color':'red'});
+        errorDisplayer.text("Price is empty");
+        price.focus();
+        return false;
+       }else if(currency.val() == ""){
+        errorDisplayer.css({'color':'red'});
+        errorDisplayer.text("Currency is empty");
+        currency.focus();
+        return false;
+       }else if(imageFile.get(0).files.length === 0){
+        errorDisplayer.css({'color':'red'});
+        errorDisplayer.text("Image file is not selected");
+        imageFile.focus();
+        return false;
+       }else{
+           return true;
+       }
+
+
+    });
+
+    });
+</script>
 </body>
 
 </html>
