@@ -7,6 +7,6 @@ import digitalRestaurant.entity.Menu;
 
 @Repository
 public interface menuRepository extends JpaRepository<Menu,Integer>{
-   Menu findByImagename(String imagename);
+   Menu findByMenuname(String menuname);
    Menu findByName(String name);
 }

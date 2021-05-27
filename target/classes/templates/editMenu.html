@@ -116,11 +116,17 @@ xmlns:th="http://www.thymeleaf.org">
                                   <label for="exampleFormControlInput1" class="form-label">Currency</label>
                                   <input type="text" class="form-control" th:field="*{currency}" id="currency" placeholder="Currency" value="฿">
                                 </div>
+
+                                   <!--Hidden field to get the user name-->
+                                    <input  type="hidden" th:value="${menu.menuname}" name="menuname">
+                               
                   
                                 <div class="mb-3">
                                   <label for="formFile" class="form-label">Add Image</label>
                                   <input class="form-control" type="file" name="img" id="imageFile">
                                 </div>
+
+                            
                                    
                                 <button type="submit" class="site-btn">Save And Update</button>
                                 <a th:href="@{/Delete-Menu}" class="site-btn">Delete Menu</a>

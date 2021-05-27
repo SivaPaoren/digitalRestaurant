@@ -1,73 +1,91 @@
 package digitalRestaurant.model;
 
-import java.nio.file.Path;
-
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
+
+import digitalRestaurant.entity.Menu;
 
 @Component
-public class MenuDto {
-    private String imageName;
-    private Path imgNameAndPath;
-    private boolean imageAlredyExistInTheDataBaseOrNot = false;
-    private String menuName;
-    private MultipartFile originalImageFile;
-    private String uploadDirectory;
-
-  
-
-
-    public MenuDto() {
-    }
-
-    public MenuDto(String menuName, MultipartFile originalImageFile, String uploadDirectory) {
-        this.menuName = menuName;
-        this.originalImageFile = originalImageFile;
-        this.uploadDirectory = uploadDirectory;
-    }
-
-
-
-
-
-    public String getImageName() {
-        return imageName;
-    }
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
-    public Path getImgNameAndPath() {
-        return imgNameAndPath;
-    }
-    public void setImgNameAndPath(Path imgNameAndPath) {
-        this.imgNameAndPath = imgNameAndPath;
-    }
-    public boolean isImageAlredyExistInTheDataBaseOrNot() {
-        return imageAlredyExistInTheDataBaseOrNot;
-    }
-    public void setImageAlredyExistInTheDataBaseOrNot(boolean imageAlredyExistInTheDataBaseOrNot) {
-        this.imageAlredyExistInTheDataBaseOrNot = imageAlredyExistInTheDataBaseOrNot;
-    }
-    public String getMenuName() {
-        return menuName;
-    }
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
-    }
-    public MultipartFile getOriginalImageFile() {
-        return originalImageFile;
-    }
-    public void setOriginalImageFile(MultipartFile originalImageFile) {
-        this.originalImageFile = originalImageFile;
-    }
-    public String getUploadDirectory() {
-        return uploadDirectory;
-    }
-    public void setUploadDirectory(String uploadDirectory) {
-        this.uploadDirectory = uploadDirectory;
-    }
-
-
+public class MenuDTO {
+    private int id;
+    private String name;
+    private String menuname;
+    private String imagename;
+    private String price;
+    private String currency = "฿";
     
+    public MenuDTO(){
+
+    }
+
+    public  MenuDTO(Menu menu){
+      this.price = menu.getPrice();
+      this.currency = menu.getCurrency();
+      this.name = menu.getName();
+      this.imagename = menu.getImagename();
+      this.menuname = menu.getMenuname();
+    }
+
+
+    public String getMenuname() {
+        return this.menuname;
+    }
+
+    public void setMenuname(String menuname) {
+        this.menuname = menuname;
+    }
+
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImagename() {
+        return this.imagename;
+    }
+
+    public void setImagename(String imagename) {
+        this.imagename = imagename;
+    }
+
+    public String getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getCurrency() {
+        return this.currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", imagename='" + getImagename() + "'" +
+            ", price='" + getPrice() + "'" +
+            ", currency='" + getCurrency() + "'" +
+            "}";
+    }
+
 
 }

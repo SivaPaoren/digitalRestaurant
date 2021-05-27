@@ -1,32 +1,23 @@
 package digitalRestaurant.controller;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import digitalRestaurant.entity.Admin;
-import digitalRestaurant.entity.Menu;
-import digitalRestaurant.model.MenuDto;
 import digitalRestaurant.service.adminServiceImpl;
-import digitalRestaurant.service.menuServiceImpl;
 
 @Controller
 public class adminController {
-    
-    //this is the directory where is images will be stored
-    public static String uploadDirectory = System.getProperty("user.dir")+"/src/main/resources/static/imageData";
      
     @Autowired
     private adminServiceImpl adminservice;
-
-    @Autowired
-    private menuServiceImpl menuService;
 
     //display login page
     @GetMapping("/Login")
@@ -79,49 +70,7 @@ public class adminController {
     }
 
 
-    @GetMapping("/Add-Menu")
-    public String showControlPanel(Model model){
-        model.addAttribute("menu",new Menu());
-        return "addMenu.html";
-    }
-
-    @PostMapping("/Add-Menu")
-    public String processAndSaveMenuForm(@ModelAttribute("menu")Menu menu,@RequestParam("img")MultipartFile image,Model model){
-        
-        //send object to validate check 
-        MenuDto menuDtoObject = new MenuDto(menu.getName(),image,uploadDirectory);
-
-        //return  the result of the object
-         MenuDto returnObjectFromSerice = menuService.saveImg(menuDtoObject);
-       
-        if(returnObjectFromSerice.isImageAlredyExistInTheDataBaseOrNot()){
-            model.addAttribute("menu", menu);
-            model.addAttribute("msg", menu.getName()+" is alredy added");
-            return "addMenu.html";
-        }else{
-            //image saved successfull will be done here
-            menu.setImagename(returnObjectFromSerice.getImageName());
-            menuService.saveMenu(menu);
-            model.addAttribute("msg", menu.getName()+" added successfully");
-            return "addMenu.html";
-        }
-    }
-
-
-
-    @GetMapping("/Menu-Category")
-    public String displayMenuToEditPage(Model model){
-       model.addAttribute("Menus", menuService.getAllMenus());
-       return "menuCategory.html";
-    }
-
-
-    @GetMapping("/Edit-Menu/{name}")
-    public String getEditMenuPage(@PathVariable("name")String name,Model model){
-      //Editing menu page will be directed from here
-        model.addAttribute("menu", menuService.getMenuByName(name));
-        return "editMenu.html";
-    }
+    
 
     
  

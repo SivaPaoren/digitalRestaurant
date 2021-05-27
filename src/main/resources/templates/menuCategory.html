@@ -107,7 +107,7 @@ xmlns:th="http://www.thymeleaf.org">
                                        <h6 th:text="${menu.name}"></h6>   
                                     </td>
                                     <td class="cart__total" th:text="${menu.price}+' '+${menu.currency}"></td>
-                                    <td class="cart__close"><a href="#" th:href="@{'/Edit-Menu/'+${menu.name}}"><span class="icon_adjust-horiz"></span></a></td>
+                                    <td class="cart__close"><a href="#" th:href="@{'/Edit-Menu/'+${menu.menuname}}"><span class="icon_adjust-horiz"></span></a></td>
                                 </tr>
                             </tbody>
                         </table>

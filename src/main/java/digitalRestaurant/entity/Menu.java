@@ -16,6 +16,7 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private String menuname;
     private String imagename;
     private String price;
     private String currency = "฿";
@@ -23,7 +24,27 @@ public class Menu {
   //  @ManyToOne(fetch = FetchType.LAZY)
    // private Customer customer; 
 
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", menuname='" + getMenuname() + "'" +
+            ", imagename='" + getImagename() + "'" +
+            ", price='" + getPrice() + "'" +
+            ", currency='" + getCurrency() + "'" +
+            "}";
+    }
 
+
+    public String getMenuname() {
+        return this.menuname;
+    }
+
+    public void setMenuname(String menuname) {
+        this.menuname = menuname;
+    }
+   
 
     public String getImagename() {
         return this.imagename;
@@ -78,16 +99,6 @@ public class Menu {
   */
 
 
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", imagename='" + getImagename() + "'" +
-            ", price='" + getPrice() + "'" +
-            ", currency='" + getCurrency() + "'" +
-            "}";
-    }
 
 
 
