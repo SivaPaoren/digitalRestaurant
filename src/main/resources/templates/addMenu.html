@@ -117,6 +117,9 @@ xmlns:th="http://www.thymeleaf.org">
                                   <label for="formFile" class="form-label">Add Image</label>
                                   <input class="form-control" type="file" name="img" id="imageFile">
                                 </div>
+
+                                <!--Hidden field to get the user name-->
+                                <input  type="hidden" th:value="${menu.menuname}" name="menuname">
                                    
                                 <button type="submit" class="site-btn">Add Menu</button>
                                 <a href="#!" th:href="@{/Menu-Category}" class="site-btn">View All Menu</a>
