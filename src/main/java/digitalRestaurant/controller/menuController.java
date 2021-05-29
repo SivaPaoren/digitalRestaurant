@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import digitalRestaurant.model.MenuDTO;
 import digitalRestaurant.service.menuService;
+
+
 
 @Controller
 public class menuController {
@@ -30,7 +33,6 @@ public class menuController {
 
     @PostMapping("/Add-Menu")
     public String processAndSaveMenuForm(@ModelAttribute("menu")MenuDTO menu,@RequestParam("img")MultipartFile image,Model model){
-
         //service will return if the username can be used or not
          boolean isMenuAndImageSavedSuccessfully = menuService.saveMenuAndImage(menu,image,uploadDirectory);
        
@@ -80,6 +82,23 @@ public class menuController {
             return "redirect:/Edit-Menu/"+menu.getMenuname();
         }
     }
+
+    @PostMapping(value="/Delete-Menu")
+    public ModelAndView deleteMenu(@RequestParam("menuname")String menuname) {
+        ModelAndView mv = new ModelAndView();
+        
+        MenuDTO menu = new MenuDTO(menuService.getMenuByMenuName(menuname));
+        boolean isDeleted = menuService.deleteMenu(menuname);
+        if(isDeleted){
+            mv.addObject("msg", "Deleted "+menu.getName()+" successfully");
+        }else{
+            mv.addObject("msg", "Deleting "+menu.getName()+" was unsuccessful");
+        }
+        mv.setViewName( "redirect:/Menu-Category");
+         return mv;
+    }
+    
+    
 
     
 }

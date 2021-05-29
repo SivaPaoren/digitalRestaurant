@@ -15,5 +15,5 @@ public interface menuService {
     public boolean saveMenuAndImage(MenuDTO menu,MultipartFile userUploadedImageFile,String uploadDirectory);
     public String   trimSpaceBarsForMenuName(String name);
     public boolean updateMenu(MenuDTO menu,MultipartFile userUploadedImageFile,String uploadDirectory);
-
+    boolean deleteMenu(String menuname);
 }

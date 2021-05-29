@@ -55,8 +55,8 @@ xmlns:th="http://www.thymeleaf.org">
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="#!" th:href="@{/Home}">Home</a></li>
-                            <li class="active"><a href="#!">Shop Cart</a></li>
+                            <li class="active"><a href="#!" th:href="@{/Home}">Home</a></li>
+                            <li><a th:href="@{/Add-Menu}">Add Menu</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -75,7 +75,7 @@ xmlns:th="http://www.thymeleaf.org">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <span>Menu Control Panel</span>
+                        <span>Menu-Category</span>
                     </div>
                 </div>
             </div>
@@ -88,6 +88,7 @@ xmlns:th="http://www.thymeleaf.org">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
+                    <p th:text="${msg}" id="errorDisplayer"></p>
                     <div class="shop__cart__table">
                         <table>
                             <thead>

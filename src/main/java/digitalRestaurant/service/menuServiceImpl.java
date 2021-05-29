@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import digitalRestaurant.controller.menuController;
 import digitalRestaurant.entity.Menu;
 import digitalRestaurant.model.MenuDTO;
 import digitalRestaurant.repository.menuRepository;
@@ -43,7 +44,7 @@ public class menuServiceImpl implements menuService{
     @Override
     public boolean saveMenuAndImage(MenuDTO menu,MultipartFile userUploadedImageFile,String uploadDirectory){
         //check if the menu name used by admin is already used or not
-        boolean isMenuNameAlreadyUsed = isMenuNameAlreadyUsed(menu.getMenuname());
+        boolean isMenuNameAlreadyUsed = isMenuNameAlreadyUsed(menu.getName());
         if(isMenuNameAlreadyUsed){
             return false;
         }else{
@@ -153,10 +154,23 @@ public class menuServiceImpl implements menuService{
      
 
    private boolean isMenuNameAlreadyUsed(String menuName){
-         Menu menu = getMenuByMenuName(menuName);
+         String menuname = trimSpaceBarsForMenuName(menuName);
+         Menu menu = getMenuByMenuName(menuname);
 
          if(menu == null)return false;
          else return true;
+   }
+
+   @Override
+   public boolean deleteMenu(String menuname) {
+       Menu menu = menuRepo.findByMenuname(menuname);
+       
+       if(deleteImage(menuController.uploadDirectory, menu.getImagename())){
+            menuRepo.delete(menu);
+            return true; 
+       }else{
+           return false;
+       } 
    }
 
 }

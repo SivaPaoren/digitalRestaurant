@@ -122,17 +122,20 @@ xmlns:th="http://www.thymeleaf.org">
                                
                   
                                 <div class="mb-3">
-                                  <label for="formFile" class="form-label">Add Image</label>
+                                  <label for="formFile" class="form-label">Update Image</label>
                                   <input class="form-control" type="file" name="img" id="imageFile">
                                 </div>
 
                             
                                    
                                 <button type="submit" class="site-btn">Save And Update</button>
-                                <a th:href="@{/Delete-Menu}" class="site-btn">Delete Menu</a>
+                            </form>
 
-                              </form>
                         </div>
+                        <form th:action="@{/Delete-Menu}" method="post">
+                            <input  type="hidden" th:value="${menu.menuname}" name="menuname">
+                            <button type="submit" class="site-btn">Delete Menu</button>
+                        </form>
                     </div>
                 </div>
 
