@@ -1,6 +1,7 @@
 package digitalRestaurant.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,8 +31,11 @@ public class menuServiceImpl implements menuService{
     }
 
     @Override
-    public List<Menu> getAllMenus() {
-        return menuRepo.findAll();
+    public List<MenuDTO> getAllMenus() {
+        List<Menu> menulist =  menuRepo.findAll();
+        List<MenuDTO> menudtoList = new ArrayList<>();
+        menulist.forEach(menu -> menudtoList.add(new MenuDTO(menu)));
+        return menudtoList;
     }
 
     @Override
@@ -164,7 +168,7 @@ public class menuServiceImpl implements menuService{
    @Override
    public boolean deleteMenu(String menuname) {
        Menu menu = menuRepo.findByMenuname(menuname);
-       
+       //check if deleting image successfully or not
        if(deleteImage(menuController.uploadDirectory, menu.getImagename())){
             menuRepo.delete(menu);
             return true; 

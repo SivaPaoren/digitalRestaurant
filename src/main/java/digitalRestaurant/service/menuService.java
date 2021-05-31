@@ -10,7 +10,7 @@ import digitalRestaurant.model.MenuDTO;
 @Component
 public interface menuService {
     void saveMenu(Menu menu);
-    List<Menu> getAllMenus();
+    List<MenuDTO> getAllMenus();
     Menu getMenuByMenuName(String menuName);
     public boolean saveMenuAndImage(MenuDTO menu,MultipartFile userUploadedImageFile,String uploadDirectory);
     public String   trimSpaceBarsForMenuName(String name);

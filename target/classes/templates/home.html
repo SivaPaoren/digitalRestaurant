@@ -110,142 +110,39 @@ xmlns:th="http://www.thymeleaf.org">
 
     <!-- Categories Section Begin -->
     <section class="categories">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 p-0">
-                    <div class="categories__item categories__large__item set-bg"
-                    data-setbg="img/categories/category-1.jpg">
-                    <div class="categories__text">
-                        <h2 class="menuName">ไก่ทอดพริกเสฉวน</h2>
-                        <p class="menuPrice">380฿</p>
-                        <a href="#!" class="addCartBtn">Add Menu</a>
-                    </div>
-                </div>
-            </div>
 
+        <div class="container-fluid">
+          <div class="row">
+
+                        <div class="col-lg-6 p-0">
+                            <div class="categories__item categories__large__item set-bg"
+                            th:attr="data-setbg=${'/imageData/'+firstMenu.imagename}">
+                                <div class="categories__text">
+                                    <h2 class="menuName" th:text="${firstMenu.name}"></h2>
+                                    <p class="menuPrice" th:text="${firstMenu.price}"></p>
+                                    <a href="#!" class="addCartBtn">Add Menu</a>
+                                </div>
+                            </div>
+                        </div>
+           
             <div class="col-lg-6">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-2.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">หมูผัดพริกหยวกจีน</h4>
-                                <p class="menuPrice">358 ฿</p>
-                                <a href="#!" class="addCartBtn">Add Menu</a>
+ 
+                 <th:block th:each=" menu : ${Menus}">
+                        <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                            <div class="categories__item set-bg" th:attr="data-setbg=${'/imageData/'+menu.imagename}">
+                                <div class="categories__text">
+                                    <h4 class="menuName" th:text="${menu.name}">dfg</h4>
+                                    <p class="menuPrice" th:text="${menu.price}">dfg</p>
+                                    <a href="#!" class="addCartBtn">Add Menu</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-3.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Kid’s fashion</h4>
-                                <p class="menuPrice">273 items</p>
-                                <a href="#!" class="addCartBtn" name="ดอกกะหลํ่าผัดพริกแห้ง">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-4.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Cosmetics</h4>
-                                <p class="menuPrice">159 items</p>
-                                <a href="#!" class="addCartBtn" name="หมาโผ่เต้าหู้">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-5.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Accessories</h4>
-                                <p class="menuPrice">792 items</p>
-                                <a href="#!" class="addCartBtn" name="มันฝรั่งผัดนํ้าส้มสายชู">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
+                </th:block>
+                    
                 </div>
             </div>
             <!--added again-->   
-
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-2.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Men’s fashion</h4>
-                                <p class="menuPrice">358 items</p>
-                                <a href="#!" class="addCartBtn" name="ไก่ผัดเกาลัด">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-3.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Kid’s fashion</h4>
-                                <p class="menuPrice">273 items</p>
-                                <a href="#!" class="addCartBtn" name="หมูรมควันผัด">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-4.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Cosmetics</h4>
-                                <p class="menuPrice">159 items</p>
-                                <a href="#!" class="addCartBtn" name="เนื้อรมควันผัด">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-5.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Accessories</h4>
-                                <p class="menuPrice">792 items</p>
-                                <a href="#!" class="addCartBtn" name="มันฝรั่งผัดหมูสามชั้น">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-2.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Men’s fashion</h4>
-                                <p class="menuPrice">358 items</p>
-                                <a href="#!" class="addCartBtn" name="เนื้อผัดพริกดอง">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-3.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Kid’s fashion</h4>
-                                <p class="menuPrice">273 items</p>
-                                <a href="#!" class="addCartBtn" name="เต้าหู้เหม็น">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-4.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Cosmetics</h4>
-                                <p class="menuPrice">159 items</p>
-                                <a href="#!" class="addCartBtn" name="เกี๊ยวซ่าหมาล่า">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
-                        <div class="categories__item set-bg" data-setbg="img/categories/category-5.jpg">
-                            <div class="categories__text">
-                                <h4 class="menuName">Accessories</h4>
-                                <p class="menuPrice">792 items</p>
-                                <a href="#!" class="addCartBtn" name="มันโถ">Add Menu</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
         </div>

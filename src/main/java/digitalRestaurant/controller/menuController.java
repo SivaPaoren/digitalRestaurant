@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import digitalRestaurant.model.MenuDTO;
 import digitalRestaurant.service.menuService;
@@ -84,18 +84,18 @@ public class menuController {
     }
 
     @PostMapping(value="/Delete-Menu")
-    public ModelAndView deleteMenu(@RequestParam("menuname")String menuname) {
-        ModelAndView mv = new ModelAndView();
+    public String deleteMenu(@RequestParam("menuname")String menuname,Model model) {
+       
         
         MenuDTO menu = new MenuDTO(menuService.getMenuByMenuName(menuname));
         boolean isDeleted = menuService.deleteMenu(menuname);
         if(isDeleted){
-            mv.addObject("msg", "Deleted "+menu.getName()+" successfully");
+            model.addAttribute("msg", "Deleted "+menu.getName()+" successfully");
         }else{
-            mv.addObject("msg", "Deleting "+menu.getName()+" was unsuccessful");
+            model.addAttribute("msg", "Deleting "+menu.getName()+" was unsuccessful");
         }
-        mv.setViewName( "redirect:/Menu-Category");
-         return mv;
+        
+        return displayMenuToEditPage(model);
     }
     
     
