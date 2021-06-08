@@ -7,6 +7,7 @@ package digitalRestaurant.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import digitalRestaurant.entity.Admin;
@@ -32,6 +33,10 @@ public class adminServiceImpl implements adminService{
 
     @Override
     public void SaveAdmin(Admin admin) {
+        //password is encripted here
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(admin.getPassword());
+        admin.setPassword(encodedPassword);
         adminRepo.save(admin);
     }
 
@@ -49,6 +54,11 @@ public class adminServiceImpl implements adminService{
                  return true;
              }
         }
+    }
+
+    @Override
+    public Admin getAdminByUserName(String name) {
+        return adminRepo.findByUsername(name);
     }
 
   

@@ -11,9 +11,11 @@ import digitalRestaurant.model.MenuDTO;
 public interface menuService {
     void saveMenu(Menu menu);
     List<MenuDTO> getAllMenus();
+    List<MenuDTO> getBestSellerMenu();
     Menu getMenuByMenuName(String menuName);
     public boolean saveMenuAndImage(MenuDTO menu,MultipartFile userUploadedImageFile,String uploadDirectory);
     public String   trimSpaceBarsForMenuName(String name);
     public boolean updateMenu(MenuDTO menu,MultipartFile userUploadedImageFile,String uploadDirectory);
     boolean deleteMenu(String menuname);
+
 }

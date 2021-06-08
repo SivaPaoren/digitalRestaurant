@@ -34,12 +34,14 @@ public class frontSideController {
      @GetMapping("/Home")
      public String getHomePage(Model model){
           //send list of menu from here to the client
-          List<MenuDTO> allMenu= menuService.getAllMenus();
+          List<MenuDTO> bestSelleterMenu = menuService.getBestSellerMenu();
 
-          model.addAttribute("firstMenu",allMenu.get(0));
-          allMenu.remove(0);
-          model.addAttribute("Menus", allMenu);
-
+          model.addAttribute("firstMenu",bestSelleterMenu.get(0));
+          bestSelleterMenu.remove(0);
+          model.addAttribute("bestSelletMenu", bestSelleterMenu);
+          
+          //all of the rest of the menu will be sent from here
+          model.addAttribute("Menus", menuService.getAllMenus());
           return "home.html";
      }
 

@@ -1054,9 +1054,17 @@ ol {
 	height: 638px;
 	padding-left: 70px;
 }
+.categories__item .categories__text{
+	background-color: white;
+	border-radius: 0.1cm;
+	opacity: 0.7;
+}
 
 .categories__item.categories__large__item .categories__text {
 	max-width: 480px;
+	background-color: white;
+	border-radius: 0.1cm;
+	opacity: 0.7;
 }
 
 .categories__item.categories__large__item .categories__text p {

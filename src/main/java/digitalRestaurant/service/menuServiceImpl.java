@@ -177,5 +177,20 @@ public class menuServiceImpl implements menuService{
        } 
    }
 
+   @Override
+   public List<MenuDTO> getBestSellerMenu() {
+       List<MenuDTO> menus = getAllMenus();
+       if(menus.size() < 5)return menus;
+
+       List<MenuDTO> bestSelletsMenu = new ArrayList<>();
+       bestSelletsMenu.add(menus.get(0));
+       bestSelletsMenu.add(menus.get(1));
+       bestSelletsMenu.add(menus.get(2));
+       bestSelletsMenu.add(menus.get(3));
+       bestSelletsMenu.add(menus.get(4));
+
+       return bestSelletsMenu;
+   }
+
 }
 

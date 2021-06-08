@@ -38,7 +38,7 @@ public class adminController {
         }else{
             admin.setPassword("");
             model.addAttribute("admin", admin);
-            model.addAttribute("error", "Incorrect User Name or Password");
+            model.addAttribute("msg", "Incorrect User Name or Password");
             return "loginAdmin.html";
         }
     }
@@ -58,8 +58,11 @@ public class adminController {
 
          boolean validOrNot = adminservice.useableAdminUsernameCheck(admin.getUsername());
          if(validOrNot){
-            adminservice.SaveAdmin(admin);
-            return "redirect:/Add-Menu";
+             adminservice.SaveAdmin(admin);
+             
+             model.addAttribute("msg", "Please Enter Password to Login");
+             model.addAttribute("username", admin.getUsername());
+            return showLoginPage(model);
          }else{
             admin.setPassword("");
             model.addAttribute("admin", admin);
